@@ -1,21 +1,8 @@
 import React, { useContext, useState, useEffect, useMemo, } from 'react';
-import PropTypes from 'prop-types';
-import { routerPropTypes } from '../prop-types/router-prop-types';
-import { $TS_FIX_ME } from '@syntaxfanatics/peon';
 import { History } from 'history';
 import { useIsMounted } from './use-is-mounted';
-import { InferPropTypes } from '../typings/infer-prop-types';
+import { withRouter, RouteComponentProps } from 'react-router';
 
-
-const urlStateProviderPropTypes = {
-  router: routerPropTypes.isRequired,
-  children: PropTypes.node.isRequired,
-};
-const urlStateProviderDefaultProps = {
-  //
-}
-
-type UrlStateProviderPropTypes = InferPropTypes<typeof urlStateProviderPropTypes, typeof urlStateProviderDefaultProps>;
 
 type UrlStateContextValue = null | {
   history: History;
@@ -24,8 +11,12 @@ type UrlStateContextValue = null | {
 
 const UrlStateContext = React.createContext<UrlStateContextValue>(null);
 
-// interface UrlStateProviderPropTypes { router: UrlStateProviderPropTypes; }
-
+function getUrlStateContextValue(history: RouteComponentProps['history'], location: RouteComponentProps['location']) {
+  return {
+    history,
+    searchParams: new URLSearchParams(location.search),
+  };
+}
 
 /**
 * @description
@@ -33,43 +24,31 @@ const UrlStateContext = React.createContext<UrlStateContextValue>(null);
 *
 * @param props
 */
-export const UrlStateProvider: React.FC<UrlStateProviderPropTypes> = ({ children, router }) => {
-  const { location } = router;
+const UrlStateInnerProvider: React.FC<RouteComponentProps> = (({ children, history, location })  => {
   const isMounted = useIsMounted();
 
-  const [urlStateContextValue, setUrlStateContextValue] = useState(() => ({
-    history: router.history as $TS_FIX_ME<History>,
-    searchParams: new URLSearchParams(location.search)
-  }));
+  if (!history || !location) throw new TypeError('UrlStateProvider must be nested within the Router. No history or location found.');
+
+  const [urlStateContextValue, setUrlStateContextValue] = useState(() => (getUrlStateContextValue(history, location)));
 
   // when search changes, dispatch change to urlState
   // effectively listens for changes via history push/replace
   // (handled by react-router...)
   useEffect(
-    () => void (isMounted && setUrlStateContextValue({
-      history: router.history as $TS_FIX_ME<History>,
-      searchParams: new URLSearchParams(location.search),
-    })),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [location.search, router.history]
+    () => void (isMounted && setUrlStateContextValue(getUrlStateContextValue(history, location))),
+    [location.search, history]
   );
 
-  return (
-    <UrlStateContext.Provider value={urlStateContextValue}>
-      {children}
-    </UrlStateContext.Provider>
-  );
-};
+  return <UrlStateContext.Provider value={urlStateContextValue}>{children}</UrlStateContext.Provider>;
+});
 
-UrlStateProvider.propTypes = urlStateProviderPropTypes;
-UrlStateProvider.defaultProps = urlStateProviderDefaultProps;
+export const UrlStateProvider = withRouter(UrlStateInnerProvider);
 
 // const getUnescapedCharRegex = (char: string) => new RegExp(`(?<!\\\\${char})`);
 // const getUnescapedCharAndRestRegex = (char: string) => new RegExp(`(?<!\\\\)${char}(.+)`);
 // const getEscapedCharRegex = (char: string) => new RegExp(`\\${char}`);
 
 type UrlStateType = Record<string, string> | { [index: string]: string };
-
 
 /**
  * @description
