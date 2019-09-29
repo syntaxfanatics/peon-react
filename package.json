@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "rm -rf dist && tsc"
+    "build": "rm -rf dist && yarn install --production=true && tsc",
+    "prepublish": "yarn build"
   },
   "repository": {
     "type": "git",
@@ -20,10 +21,7 @@
   "homepage": "https://github.com/syntaxfanatics/peon-react#readme",
   "dependencies": {
     "@syntaxfanatics/peon": "^0.0.5",
-    "prop-types": "^15.7.2",
-    "react": "^16.10.0",
-    "react-dom": "^16.10.0",
-    "react-router": "^5.1.1"
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
@@ -44,5 +42,10 @@
     "ts-jest": "^24.1.0",
     "ts-node-dev": "^1.0.0-pre.43",
     "typescript": "^3.6.3"
+  },
+  "peerDependencies": {
+    "history": "^4.10.1",
+    "react": "^16.10.1",
+    "react-router": "^5.1.1"
   }
 }
