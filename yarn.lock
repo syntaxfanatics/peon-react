@@ -293,10 +293,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@syntaxfanatics/peon@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@syntaxfanatics/peon/-/peon-0.0.5.tgz#3307d75d4caed131e30c2598bde6c8fe3996caf6"
-  integrity sha512-jf+PgMoozxHYuMQPLP7/xxweetZyOiskjkRTcmdbFrrLsnBxEssITQihRIV83Jy9BAqrZydLjxGKYgc2GBWJrA==
+"@syntaxfanatics/peon@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@syntaxfanatics/peon/-/peon-0.0.7.tgz#c1c13ce18d9edede2ba116ec90a446f0ce1f984f"
+  integrity sha512-RAVYaCVPFJzwDY1TniLgbTjYJr1FqfvaIJiTevPNGqHhmYiekf1UJ/4P3OWHYGp6y2AjMROa3oI9ohVRQl+RKw==
 
 "@types/babel__core@^7.1.0":
   version "7.1.3"

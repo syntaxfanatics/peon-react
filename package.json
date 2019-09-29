@@ -1,12 +1,12 @@
 {
   "name": "@syntaxfanatics/peon-react",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A helper library for JavaScript and TypeScript React projects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish:build": "rm -rf dist && yarn install --production=true && tsc",
+    "publish:build": "rm -rf dist && yarn install && tsc",
     "publish:run": "npm publish --access=public"
   },
   "repository": {
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/syntaxfanatics/peon-react#readme",
   "dependencies": {
-    "@syntaxfanatics/peon": "^0.0.5"
+    "@syntaxfanatics/peon": "^0.0.7"
   },
   "files": [
     "dist"
