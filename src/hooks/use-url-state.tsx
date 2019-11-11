@@ -9,7 +9,11 @@ type UrlStateContextValue = null | {
   searchParams: URLSearchParams;
 };
 
+
+
 const UrlStateContext = React.createContext<UrlStateContextValue>(null);
+
+
 
 function getUrlStateContextValue(history: RouteComponentProps['history'], location: RouteComponentProps['location']) {
   return {
@@ -17,6 +21,8 @@ function getUrlStateContextValue(history: RouteComponentProps['history'], locati
     searchParams: new URLSearchParams(location.search),
   };
 }
+
+
 
 /**
 * @description
@@ -42,11 +48,17 @@ const UrlStateInnerProvider: React.FC<RouteComponentProps> = (({ children, histo
   return <UrlStateContext.Provider value={urlStateContextValue}>{children}</UrlStateContext.Provider>;
 });
 
+
+
 export const UrlStateProvider = withRouter(UrlStateInnerProvider);
+
+
 
 // const getUnescapedCharRegex = (char: string) => new RegExp(`(?<!\\\\${char})`);
 // const getUnescapedCharAndRestRegex = (char: string) => new RegExp(`(?<!\\\\)${char}(.+)`);
 // const getEscapedCharRegex = (char: string) => new RegExp(`\\${char}`);
+
+
 
 type UrlStateType = Record<string, string> | { [index: string]: string };
 
@@ -82,6 +94,8 @@ function singleUrlParamStringToObject<UrlState extends UrlStateType>(
   return urlState;
 }
 
+
+
 /**
  * @description
  *
@@ -111,6 +125,7 @@ function singleUrlParamObjectToString<UrlState extends UrlStateType>(
 
   return encodedParamString;
 }
+
 
 
 /**
