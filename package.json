@@ -8,7 +8,7 @@
     "upgrade-interactive": "npm-check --update",
     "test": "jest",
     "test:watch": "jest --watch",
-    "publish:build": "rm -rf dist && npm install --production && tsc"
+    "prepublish:build": "rm -rf dist && npm install --production && tsc"
   },
   "repository": {
     "type": "git",
