@@ -37,4 +37,5 @@
   "cSpell.words": [
     "esnext"
   ],
+  "typescript.tsdk": "node_modules/typescript/lib",
 }

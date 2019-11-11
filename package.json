@@ -1,13 +1,14 @@
 {
   "name": "@syntaxfanatics/peon-react",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A helper library for JavaScript and TypeScript React projects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "publish:build": "rm -rf dist && yarn install && tsc",
-    "publish:run": "npm publish --access=public"
+    "upgrade-interactive": "npm-check --update",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "publish:build": "rm -rf dist && npm install --production && tsc"
   },
   "repository": {
     "type": "git",
