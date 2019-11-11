@@ -1,6 +1,6 @@
 {
   "name": "@syntaxfanatics/peon-react",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "A helper library for JavaScript and TypeScript React projects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
